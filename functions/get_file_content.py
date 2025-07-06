@@ -1,4 +1,6 @@
 import os
+from google.genai import types
+from config import MAX_CHARS
 
 def get_file_content(working_directory, file_path):
   abs_working_dir = os.path.abspath(working_directory)
@@ -11,7 +13,6 @@ def get_file_content(working_directory, file_path):
       return f'Error: File not found or is not a regular file: "{file_path}"'
   
   try:
-    MAX_CHARS = 10000
     file_content_string = ''
 
     with open(target_path, "r") as f:
@@ -23,3 +24,17 @@ def get_file_content(working_directory, file_path):
     return file_content_string
   except Exception as e:
     return f'Error: {e}'
+  
+schema_get_file_content = types.FunctionDeclaration(
+  name="get_file_content",
+  description="Gets the contents of a specific file, constrained to the working directory.",
+  parameters=types.Schema(
+    type=types.Type.OBJECT,
+    properties={
+      "file_path": types.Schema(
+        type=types.Type.STRING,
+        description="The path to the file which contents we want to read, relative to the working directory.",
+      ),
+    },
+  ),
+)
