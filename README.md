@@ -1,3 +1,9 @@
+### Install pip
+`sudo apt install python3-pip`
+
+### Install UV with pip
+`pip install uv`
+
 ### Create project with UV
 
 ```
@@ -11,7 +17,7 @@ cd your-project-name
 uv venv
 ```
 
-### Activate Virtaul environment
+### Activate Virtual environment
 
 ```
 source .venv/bin/activate
